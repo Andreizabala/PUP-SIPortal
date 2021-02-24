@@ -3,7 +3,7 @@ include("insert.php");
 if(isset($_GET['edited'])){
   $id=$_GET['edited'];
   $edit= true;
-  $result = mysqli_query($db, "SELECT * FROM information order by id desc");
+  $result = mysqli_query($db, "SELECT * FROM information WHERE id=$id ");
   $record=mysqli_fetch_array($result);
  
   $studno = $record['studno'];
@@ -12,6 +12,7 @@ if(isset($_GET['edited'])){
   $contact = $record['contact'];
   $modeoflearn= $record['modeoflearn'];
   $scholastic = $record['scholastic'];
+  
   $id = $record['id'];
 
 }
@@ -41,13 +42,14 @@ if(isset($_GET['edited'])){
         <div class="first-container"> <!-- DESIGN 1ST COLUMN -->
             <div class="title">Form Data</div>
             <form method="post"  action="insert.php" class="form" enctype="multipart/form-data">
-                <div class="input_field">
+            <div class="input_field">
+                    <input type="hidden" name="id"  value="<?php echo $id;?>">	
+                </div>
+            <div class="input_field">
                     <label>Student Number</label>
                     <input type="text" class="input" name="studno"  value="<?php echo $studno;?>" required>
                 </div>
-                <div class="input_field">
-                    <input type="hidden" name="id"  value="<?php echo $id;?>">	
-                </div>
+             
                 <div class="input_field">
                     <label>Full Name</label>
                     <input type="text" class="input" name="name"  value="<?php echo $name;?>" required>
@@ -132,7 +134,7 @@ if(isset($_GET['edited'])){
                             <td class="find"><?php echo $row["modeoflearn"];?></td>
                             <td class="find"><?php echo $row["scholastic"];?></td>
                             <td>
-                                <a class="button" name="edit" href="admin.php?edited=<?php echo $row['id']; ?>">Edit</a>
+                                <a class="button"  href="admin.php?edited=<?php echo $row['id']; ?>">Edit</a>
                             </td>
                             <td>
                                  <a class="button" name="delete" href="admin.php?delete=<?php echo $row['id']; ?>">Delete</a>

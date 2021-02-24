@@ -30,7 +30,7 @@
          $searchKey = " ";
        }
       
-       $sql = "SELECT * FROM information ";
+       $sql = "SELECT * FROM information order by name asc";
        $result = mysqli_query($con,$sql);
       ?>
 
